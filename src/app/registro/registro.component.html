@@ -1,0 +1,17 @@
+<ion-content [fullscreen]="true">
+  <div class="flex-center">
+    <ion-card class="cardFormulario">
+      <ion-card-header>
+        <ion-card-title color="primary">Crear cuenta</ion-card-title>
+      </ion-card-header>
+      
+        <ion-input label="Email" class="inputFormulario" labelPlacement="floating" placeholder="Introduce un email" type="email" fill="outline"></ion-input>
+        <ion-input label="Contraseña" class="inputFormulario" labelPlacement="floating" placeholder="Introduce una contraseña" type="password" fill="outline"></ion-input>
+        <ion-input label="Fecha de Nacimiento" class="inputFormulario" labelPlacement="floating" placeholder="Introduce una fecha" type="date" fill="outline"></ion-input>
+        <ion-input label="Teléfono" class="inputFormulario" labelPlacement="floating" placeholder="Introduce un teléfono" type="number" fill="outline"></ion-input>
+
+      <ion-button class="botonFormulario" expand="block"> Crear cuenta </ion-button>
+      <ion-button (click)="navegarLogin()" class="botonFormulario" fill="clear" size="full">Ya tengo cuenta</ion-button>
+    </ion-card>
+  </div>
+</ion-content>
