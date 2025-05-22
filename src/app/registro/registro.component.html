@@ -1,16 +1,19 @@
 <ion-content [fullscreen]="true">
   <div class="flex-center">
     <ion-card class="cardFormulario">
+      <!-- Header -->
       <ion-card-header>
         <ion-card-title color="primary">Crear cuenta</ion-card-title>
       </ion-card-header>
       
-        <ion-input label="Email" class="inputFormulario" labelPlacement="floating" placeholder="Introduce un email" type="email" fill="outline"></ion-input>
-        <ion-input label="Contraseña" class="inputFormulario" labelPlacement="floating" placeholder="Introduce una contraseña" type="password" fill="outline"></ion-input>
-        <ion-input label="Fecha de Nacimiento" class="inputFormulario" labelPlacement="floating" placeholder="Introduce una fecha" type="date" fill="outline"></ion-input>
-        <input class="inputFormularioNormal" labelPlacement="floating" placeholder="Introduce un teléfono" type="text" mask="999 999 999"/>
+      <!-- Campos formulario (se identifican los campos con ngModel) -->
+      <ion-input [(ngModel)]="email" label="Email" class="inputFormulario" labelPlacement="floating" placeholder="Introduce un email" type="email" fill="outline"></ion-input>
+      <ion-input [(ngModel)]="contrasena" label="Contraseña" class="inputFormulario" labelPlacement="floating" placeholder="Introduce una contraseña" type="password" fill="outline"></ion-input>
+      <ion-input [(ngModel)]="fechaNac" label="Fecha de Nacimiento" class="inputFormulario" labelPlacement="floating" placeholder="Introduce una fecha" type="date" fill="outline"></ion-input>
+      <input [(ngModel)]="telefono" class="inputFormularioNormal" labelPlacement="floating" placeholder="Introduce un teléfono" type="text" mask="999 999 999"/>
 
-      <ion-button class="botonFormulario" expand="block"> Crear cuenta </ion-button>
+      <!-- Botones formulario -->
+      <ion-button (click)="crearCuenta()" class="botonFormulario" expand="block"> Crear cuenta </ion-button>
       <ion-button (click)="navegarLogin()" class="botonFormulario" fill="clear" size="full">Ya tengo cuenta</ion-button>
     </ion-card>
   </div>

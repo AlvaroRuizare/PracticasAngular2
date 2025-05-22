@@ -80,6 +80,7 @@
   outline-width: 2px;
   outline-style: solid;
   outline-color: var(--ion-color-primary);
+  outline-offset: -1px;
 }
 
 .inputFormulario {
@@ -94,4 +95,9 @@
 .botonFormulario {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+ion-input.ng-valid {
+  --highlight-color-valid: var(--ion-color-primary); // para que no se ponga verde si es válido
+  --highlight-color: var(--ion-color-medium); // color gris por defecto
 }
