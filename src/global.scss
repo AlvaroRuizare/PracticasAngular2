@@ -38,11 +38,6 @@
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
 
-
-.fondo {
-    background: #f00;
-}
-
 // Centrar el contenido del elemento
 .flex-center{
     display: flex;
@@ -59,12 +54,41 @@
     width: 300px;
 }
 
+.inputFormularioNormal {
+  background: var(--ion-color-tertiary);
+  color: var(--ion-color-primary);
+  margin-bottom: 10px;
+  padding: 19px;
+  border-radius: 3px;
+  border: 0px;
+  outline-width: 1px;
+  outline-style: solid;
+  outline-color: rgb(95, 95, 95);
+  width: 100%;
+  caret-color: var(--ion-color-primary);
+}
+
+.inputFormularioNormal:hover {
+  outline-color: rgb(194, 194, 194);
+}
+
+.inputFormularioNormal::placeholder{
+  color: var(--ion-color-primary-tint);
+}
+
+.inputFormularioNormal:focus{
+  outline-width: 2px;
+  outline-style: solid;
+  outline-color: var(--ion-color-primary);
+}
+
 .inputFormulario {
   --background: var(--ion-color-tertiary);
   --color: var(--ion-color-primary);
   --placeholder-color: var(--ion-color-primary-shade);
   --placeholder-opacity: 0.8;
   margin-bottom: 10px;
+  color-scheme: light;
 }
 
 .botonFormulario {
