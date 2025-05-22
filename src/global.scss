@@ -101,3 +101,21 @@ ion-input.ng-valid {
   --highlight-color-valid: var(--ion-color-primary); // para que no se ponga verde si es válido
   --highlight-color: var(--ion-color-medium); // color gris por defecto
 }
+
+.inputNormalInvalido {
+  outline-color: var(--ion-color-danger);
+
+}
+
+.inputNormalInvalido:focus {
+  outline-color: var(--ion-color-danger);
+  outline-width: 2px;
+}
+
+.inputNormalInvalido:hover {
+  outline-color: var(--ion-color-danger);
+}
+
+.inputNormalInvalido::placeholder{
+  color: var(--ion-color-danger);
+}

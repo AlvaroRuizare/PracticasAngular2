@@ -8,10 +8,11 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { ReactiveFormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, NgxMaskDirective],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, NgxMaskDirective, ReactiveFormsModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, provideNgxMask()],
   bootstrap: [AppComponent],
 })
