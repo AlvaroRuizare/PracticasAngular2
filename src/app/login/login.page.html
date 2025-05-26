@@ -19,10 +19,29 @@
         </table>
       </ion-card-header>
       
-        <ion-input label="{{ 'LOGIN.EMAIL_LABEL' | translate }}" class="inputFormulario" labelPlacement="floating" placeholder="{{ 'LOGIN.EMAIL_PLACEHOLDER' | translate }}" type="email" fill="outline"></ion-input>
-        <ion-input label="{{ 'LOGIN.PASSWORD_LABEL' | translate }}" class="inputFormulario" labelPlacement="floating" placeholder="{{ 'LOGIN.PASSWORD_PLACEHOLDER' | translate }}" type="password" fill="outline"></ion-input>
+      <form [formGroup]="grupoFormLogin">
 
-      <ion-button class="botonFormulario" expand="block">{{ 'LOGIN.BUTTON' | translate }}</ion-button>
+        <input 
+          formControlName="email" 
+          class="inputFormularioNormal"
+          labelPlacement="floating" 
+          placeholder="{{ 'LOGIN.EMAIL_PLACEHOLDER' | translate }}" 
+          type="text"
+          mask="A*@A*.A*" [validation]="true" [dropSpecialCharacters]="false"
+          [ngClass]="{ 'inputNormalInvalido': grupoFormLogin.get('email')?.touched && grupoFormLogin.get('email')?.invalid }"/>
+
+        <ion-input 
+          formControlName="contrasena" 
+          label="{{ 'LOGIN.PASSWORD_LABEL' | translate }}" 
+          class="inputFormulario" 
+          labelPlacement="floating" 
+          placeholder="{{ 'LOGIN.PASSWORD_PLACEHOLDER' | translate }}" 
+          type="password" 
+          fill="outline">
+        </ion-input>
+      </form>
+
+      <ion-button (click)="iniciarSesion()" class="botonFormulario" expand="block">{{ 'LOGIN.BUTTON' | translate }}</ion-button>
       <ion-button (click)="navegarRegistro()" class="botonFormulario" fill="clear" size="full">{{ 'LOGIN.CREATEACCOUNT' | translate }}</ion-button>
     </ion-card>
   </div>
