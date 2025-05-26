@@ -4,14 +4,26 @@
   <div class="flex-center">
     <ion-card class="cardFormulario">
       <ion-card-header>
-        <ion-card-title color="primary">Iniciar sesión</ion-card-title>
+        <table>
+          <tr>
+            <td>
+                <ion-card-title color="primary">{{ 'LOGIN.TITLE' | translate }}</ion-card-title>
+            </td>
+            <td>
+              <select [(ngModel)]="selectLenguaje" (change)="cambiarLenguaje($event)" class="selectLenguaje">
+                <option value="es">ES</option>
+                <option value="en">EN</option>
+              </select>
+            </td>
+          </tr>
+        </table>
       </ion-card-header>
       
-        <ion-input label="Email" class="inputFormulario" labelPlacement="floating" placeholder="Introduce un email" type="email" fill="outline"></ion-input>
-        <ion-input label="Contraseña" class="inputFormulario" labelPlacement="floating" placeholder="Introduce una contraseña" type="password" fill="outline"></ion-input>
+        <ion-input label="{{ 'LOGIN.EMAIL_LABEL' | translate }}" class="inputFormulario" labelPlacement="floating" placeholder="{{ 'LOGIN.EMAIL_PLACEHOLDER' | translate }}" type="email" fill="outline"></ion-input>
+        <ion-input label="{{ 'LOGIN.PASSWORD_LABEL' | translate }}" class="inputFormulario" labelPlacement="floating" placeholder="{{ 'LOGIN.PASSWORD_PLACEHOLDER' | translate }}" type="password" fill="outline"></ion-input>
 
-      <ion-button class="botonFormulario" expand="block"> Iniciar sesión </ion-button>
-      <ion-button (click)="navegarRegistro()" class="botonFormulario" fill="clear" size="full">Crear cuenta</ion-button>
+      <ion-button class="botonFormulario" expand="block">{{ 'LOGIN.BUTTON' | translate }}</ion-button>
+      <ion-button (click)="navegarRegistro()" class="botonFormulario" fill="clear" size="full">{{ 'LOGIN.CREATEACCOUNT' | translate }}</ion-button>
     </ion-card>
   </div>
 </ion-content>

@@ -3,7 +3,7 @@
     <ion-card class="cardFormulario">
       <!-- Header -->
       <ion-card-header>
-        <ion-card-title color="primary">Crear cuenta</ion-card-title>
+        <ion-card-title color="primary">{{ 'REGISTER.TITLE' | translate }}</ion-card-title>
       </ion-card-header>
       
       <form [formGroup]="grupoFormRegistro">
@@ -12,27 +12,27 @@
           formControlName="email" 
           class="inputFormularioNormal"
           labelPlacement="floating" 
-          placeholder="Introduce un email" 
+          placeholder="{{ 'REGISTER.EMAIL_PLACEHOLDER' | translate }}" 
           type="email"
           mask="A*@A*.SSS" [validation]="true" [dropSpecialCharacters]="false"
           [ngClass]="{ 'inputNormalInvalido': grupoFormRegistro.get('email')?.touched && grupoFormRegistro.get('email')?.invalid }"/>
         
         <ion-input 
           formControlName="contrasena" 
-          label="Contraseña" 
+          label="{{ 'REGISTER.PASSWORD_LABEL' | translate }}" 
           class="inputFormulario" 
           labelPlacement="floating" 
-          placeholder="Introduce una contraseña" 
+          placeholder="{{ 'REGISTER.PASSWORD_PLACEHOLDER' | translate }}" 
           type="password" 
           fill="outline">
         </ion-input>
         
         <ion-input 
           formControlName="fechaNac" 
-          label="Fecha de Nacimiento" 
+          label="{{ 'REGISTER.DATE_LABEL' | translate }}" 
           class="inputFormulario" 
           labelPlacement="floating" 
-          placeholder="Introduce una fecha" 
+          placeholder="{{ 'REGISTER.DATE_PLACEHOLDER' | translate }}" 
           type="date" 
           fill="outline">
         </ion-input>
@@ -41,14 +41,14 @@
           formControlName="telefono" 
           class="inputFormularioNormal" 
           labelPlacement="floating" 
-          placeholder="Introduce un teléfono" 
+          placeholder="{{ 'REGISTER.PHONE_PLACEHOLDER' | translate }}" 
           type="text" 
           mask="999 999 999"
           [ngClass]="{ 'inputNormalInvalido': grupoFormRegistro.get('telefono')?.touched && grupoFormRegistro.get('telefono')?.invalid }"/>
   
         <!-- Botones formulario -->
-        <ion-button (click)="crearCuenta()" class="botonFormulario" expand="block"> Crear cuenta </ion-button>
-        <ion-button (click)="navegarLogin()" class="botonFormulario" fill="clear" size="full">Ya tengo cuenta</ion-button>
+        <ion-button (click)="crearCuenta()" class="botonFormulario" expand="block">{{ 'REGISTER.BUTTON' | translate }}</ion-button>
+        <ion-button (click)="navegarLogin()" class="botonFormulario" fill="clear" size="full">{{ 'REGISTER.CREATEACCOUNT' | translate }}</ion-button>
       </form>
     </ion-card>
   </div>
