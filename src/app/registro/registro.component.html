@@ -13,8 +13,8 @@
           class="inputFormularioNormal"
           labelPlacement="floating" 
           placeholder="{{ 'REGISTER.EMAIL_PLACEHOLDER' | translate }}" 
-          type="email"
-          mask="A*@A*.SSS" [validation]="true" [dropSpecialCharacters]="false"
+          type="text"
+          mask="A*@A*.A*" [validation]="true" [dropSpecialCharacters]="false"
           [ngClass]="{ 'inputNormalInvalido': grupoFormRegistro.get('email')?.touched && grupoFormRegistro.get('email')?.invalid }"/>
         
         <ion-input 

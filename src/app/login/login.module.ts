@@ -8,6 +8,7 @@ import { LoginPageRoutingModule } from './login-routing.module';
 import { LoginPage } from './login.page';
 import { RegistroComponent } from '../registro/registro.component';
 import { TranslateService, TranslatePipe, TranslateDirective } from "@ngx-translate/core";
+import { NgxMaskDirective } from 'ngx-mask';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { TranslateService, TranslatePipe, TranslateDirective } from "@ngx-transl
     ReactiveFormsModule,
     RegistroComponent,
     TranslatePipe, 
-    TranslateDirective
+    TranslateDirective,
+    NgxMaskDirective
   ]
 })
 export class LoginPageModule {

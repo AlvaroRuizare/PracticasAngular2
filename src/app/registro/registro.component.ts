@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Geolocation } from '@capacitor/geolocation';
 import { TranslateService, TranslatePipe, TranslateDirective, TranslateModule } from "@ngx-translate/core";
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-registro',
@@ -35,6 +36,7 @@ export class RegistroComponent  implements OnInit {
     this.translate.use('es');
   }
 
+  
   // Al iniciar página...
   ngOnInit() {
     this.obtenerUbicacion();
@@ -69,7 +71,6 @@ export class RegistroComponent  implements OnInit {
 
   // Crear cuenta
   crearCuenta(){
-
     // Validación de campos
     if (this.grupoFormRegistro.invalid) { // Si algun campo del grupo es invalido...
       this.grupoFormRegistro.markAllAsTouched(); // marcar grupo como tocado
@@ -86,7 +87,7 @@ export class RegistroComponent  implements OnInit {
     // Crear array nuevo usuario
     const arrayUsuarioNuevo = {
       email: email,
-      contrasena: contrasena,
+      contrasena: this.cifrarContrasena(contrasena),
       fechaNac: fechaNac,
       telefono: telefono,
       latitud : this.latitud,
@@ -98,8 +99,7 @@ export class RegistroComponent  implements OnInit {
 
     // Guardar en localStorage
     localStorage.setItem('usuarios', JSON.stringify(arrayUsuariosLS));
-    
-    alert(email + " registrado correctamente.");
+    alert("El usuario " + email + " se ha registrado correctamente.");
 
     // Resetear campos
     this.grupoFormRegistro.reset();
@@ -114,5 +114,11 @@ export class RegistroComponent  implements OnInit {
     
     // Cambiar lenguaje login
     this.translate.use(lenguajeTraducir)
+  }
+
+
+  // Cifrar contraseña
+  cifrarContrasena(contrasenaCifrar : string) : String {
+    return CryptoJS.SHA256(contrasenaCifrar).toString(CryptoJS.enc.Hex);
   }
 }
