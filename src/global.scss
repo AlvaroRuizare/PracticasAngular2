@@ -102,6 +102,33 @@ ion-input.ng-valid {
   --highlight-color: var(--ion-color-medium); // color gris por defecto
 }
 
+.selectLenguaje {
+  background: var(--ion-color-tertiary);
+  color: var(--ion-color-primary);
+  padding: 7px;
+  border-radius: 3px;
+  border: 0px;
+  outline-width: 1px;
+  outline-style: solid;
+  outline-color: rgb(95, 95, 95);
+  caret-color: var(--ion-color-primary);
+}
+
+.selectLenguaje:hover {
+  outline-color: rgb(194, 194, 194);
+}
+
+.selectLenguaje::placeholder{
+  color: var(--ion-color-primary-tint);
+}
+
+.selectLenguaje:focus{
+  outline-width: 2px;
+  outline-style: solid;
+  outline-color: var(--ion-color-primary);
+  outline-offset: -1px;
+}
+
 .inputNormalInvalido {
   outline-color: var(--ion-color-danger);
 

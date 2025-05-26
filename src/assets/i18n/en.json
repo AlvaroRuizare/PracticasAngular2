@@ -1,0 +1,23 @@
+{
+  "LOGIN": {
+    "TITLE": "Log in",
+    "EMAIL_LABEL": "Email",
+    "EMAIL_PLACEHOLDER": "Enter an email",
+    "PASSWORD_LABEL": "Password",
+    "PASSWORD_PLACEHOLDER": "Enter a password",
+    "BUTTON": "Log in",
+    "CREATEACCOUNT": "Create account"
+  },
+  "REGISTER": {
+    "TITLE": "Create account",
+    "EMAIL_LABEL": "Email",
+    "EMAIL_PLACEHOLDER": "Enter an email",
+    "PASSWORD_LABEL": "Password",
+    "PASSWORD_PLACEHOLDER": "Enter a password",
+    "DATE_LABEL": "Birth date",
+    "PHONE_LABEL": "Phone number",
+    "PHONE_PLACEHOLDER": "Enter a phone",
+    "BUTTON": "Create account",
+    "CREATEACCOUNT": "I already have an account"
+  }
+}

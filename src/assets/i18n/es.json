@@ -1,0 +1,23 @@
+{
+  "LOGIN": {
+    "TITLE": "Iniciar sesión",
+    "EMAIL_LABEL": "Email",
+    "EMAIL_PLACEHOLDER": "Introduce un email",
+    "PASSWORD_LABEL": "Contraseña",
+    "PASSWORD_PLACEHOLDER": "Introduce una contraseña",
+    "BUTTON": "Iniciar sesión",
+    "CREATEACCOUNT": "Crear cuenta"
+  },
+  "REGISTER": {
+    "TITLE": "Crear cuenta",
+    "EMAIL_LABEL": "Email",
+    "EMAIL_PLACEHOLDER": "Introduce un email",
+    "PASSWORD_LABEL": "Contraseña",
+    "PASSWORD_PLACEHOLDER": "Introduce una contraseña",
+    "DATE_LABEL": "Fecha de Nacimiento",
+    "PHONE_LABEL": "Teléfono",
+    "PHONE_PLACEHOLDER": "Introduce un teléfono",
+    "BUTTON": "Crear cuenta",
+    "CREATEACCOUNT": "Ya tengo cuenta"
+  }
+}

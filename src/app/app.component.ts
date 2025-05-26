@@ -1,6 +1,7 @@
 // Primer archivo cargado por la aplicación
 
 import { Component } from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root', // id para llamar a la página desde el html
@@ -9,5 +10,5 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class AppComponent {
-  constructor() {}
+  constructor(private translate: TranslateService) {}
 }
