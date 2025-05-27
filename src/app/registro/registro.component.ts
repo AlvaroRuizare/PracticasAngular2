@@ -1,7 +1,7 @@
 import { GestureController, IonicModule } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'; // Dependencia Router para navegar
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxMaskDirective } from 'ngx-mask';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -28,6 +28,7 @@ export class RegistroComponent  implements OnInit {
   grupoFormRegistro!: FormGroup // Creamos grupo de formulario
   latitud : number | undefined
   longitud : number | undefined
+  arrayStringsTipo : string[] = []
 
 
   constructor(private router: Router, private formBuilder: FormBuilder, private translate: TranslateService) {
@@ -41,15 +42,23 @@ export class RegistroComponent  implements OnInit {
   ngOnInit() {
     this.obtenerUbicacion();
 
+    this.inicializarTipos();
+
     // Rellenamos grupo de formulario con los campos
     this.grupoFormRegistro = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       contrasena: ['', [Validators.required, Validators.minLength(6)]],
       fechaNac: ['', Validators.required],
-      telefono: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]]
+      telefono: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]],
+      tipoUsuario: ['', [Validators.required]]
     });
-
+    
     this.traducirPagina();
+  }
+  
+
+  tipoValidator(control: AbstractControl) {
+    return control.value !== '0' ? null : { tipoInvalido: true };
   }
 
 
@@ -78,7 +87,7 @@ export class RegistroComponent  implements OnInit {
     }
 
     // Guardar valores del grupo en variables
-    const { email, contrasena, fechaNac, telefono } = this.grupoFormRegistro.value;
+    const { email, contrasena, fechaNac, telefono, tipoUsuario } = this.grupoFormRegistro.value;
 
     // Array actual localStorage
     const jsonUsuariosLS = localStorage.getItem('usuarios'); // Obtener el array actual de usuarios del localStorage
@@ -91,7 +100,8 @@ export class RegistroComponent  implements OnInit {
       fechaNac: fechaNac,
       telefono: telefono,
       latitud : this.latitud,
-      longitud : this.longitud
+      longitud : this.longitud,
+      tipoUsuario : tipoUsuario
     };
 
     // Agregar nuevo usuario al array
@@ -120,5 +130,33 @@ export class RegistroComponent  implements OnInit {
   // Cifrar contraseña
   cifrarContrasena(contrasenaCifrar : string) : String {
     return CryptoJS.SHA256(contrasenaCifrar).toString(CryptoJS.enc.Hex);
+  }
+
+
+  // Inicializar tipos de usuario
+  inicializarTipos(){
+    // Obtener de localstorage
+    var jsonTiposLS = localStorage.getItem('tiposUsuario');
+    var arrayTiposLS = jsonTiposLS ? JSON.parse(jsonTiposLS) : [];
+
+    console.log(arrayTiposLS.length);
+  
+
+    // Si no hay tipos de usuario en localStorage...
+    if(arrayTiposLS.length == 0){
+      // Crear array tipos usuario
+      const arrayTiposUsuario = [
+        {tipoUsuario: "Usuario"},
+        {tipoUsuario: "Administrador"}
+      ];
+  
+      // Guardar en localStorage
+      localStorage.setItem('tiposUsuario', JSON.stringify(arrayTiposUsuario));
+    }
+  
+    // Por cada tipo del array de tipos
+    for (const tipo of arrayTiposLS) {
+      this.arrayStringsTipo.push(tipo.tipoUsuario) // Meter string en array de strings
+    }
   }
 }

@@ -18,6 +18,8 @@
     "PHONE_LABEL": "Teléfono",
     "PHONE_PLACEHOLDER": "Introduce un teléfono",
     "BUTTON": "Crear cuenta",
-    "CREATEACCOUNT": "Ya tengo cuenta"
+    "CREATEACCOUNT": "Ya tengo cuenta",
+    "TIPO_LABEL": "Tipo de Usuario",
+    "TIPO_PLACEHOLDER": "Seleccionar tipo"
   }
 }

@@ -7,7 +7,7 @@
       </ion-card-header>
       
       <form [formGroup]="grupoFormRegistro">
-        <!-- Campos formulario (se identifican los campos con ngModel) -->
+        <!-- Campos formulario (se identifican los campos con formControlName) -->
         <input 
           formControlName="email" 
           class="inputFormularioNormal"
@@ -45,6 +45,11 @@
           type="text" 
           mask="999 999 999"
           [ngClass]="{ 'inputNormalInvalido': grupoFormRegistro.get('telefono')?.touched && grupoFormRegistro.get('telefono')?.invalid }"/>
+
+        <!-- Desplegable tipos usuario -->
+        <ion-select formControlName="tipoUsuario" label="Tipo de usuario" class="selectTipo" interface="popover" fill="outline" labelPlacement="floating">
+          <ion-select-option *ngFor="let tipo of arrayStringsTipo">{{tipo}}</ion-select-option> <!-- ngFor: obtiene el contenido de un array del .ts y crea elementos html por cada elemento -->
+        </ion-select>
   
         <!-- Botones formulario -->
         <ion-button (click)="crearCuenta()" class="botonFormulario" expand="block">{{ 'REGISTER.BUTTON' | translate }}</ion-button>
