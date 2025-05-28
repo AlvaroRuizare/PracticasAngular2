@@ -1,4 +1,5 @@
 import { Component, OnInit, TrackByFunction } from '@angular/core';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-listado',
@@ -9,6 +10,7 @@ import { Component, OnInit, TrackByFunction } from '@angular/core';
 export class ListadoPage implements OnInit {
   usuarioLogueado : any
   arrayUsuariosLS : any[] = []
+
 
   constructor() { }
 
@@ -28,14 +30,33 @@ export class ListadoPage implements OnInit {
   }
 
   borrarUsuario(indiceUsuarioClicado: number) {
-    localStorage.removeItem("usuarios"); // Borrar tabla usuarios del localStorage
+    // Diálogo de confirmación
+    Swal.fire({
+      title: "Borrar usuario",
+      text: "¿Estás seguro?",
+      icon: "warning",
+      heightAuto: false,
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, bórralo!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem("usuarios"); // Borrar tabla usuarios del localStorage
 
-    const emailBorrado = this.arrayUsuariosLS[indiceUsuarioClicado].email // Guardar nombre email antes de borrar
+        const emailBorrado = this.arrayUsuariosLS[indiceUsuarioClicado].email // Guardar nombre email antes de borrar
 
-    this.arrayUsuariosLS.splice(indiceUsuarioClicado, 1) // Borrar usuario del array de usuarios
+        this.arrayUsuariosLS.splice(indiceUsuarioClicado, 1) // Borrar usuario del array de usuarios
 
-    localStorage.setItem("usuarios", JSON.stringify(this.arrayUsuariosLS)); // Subir nuevo array de usuarios al localStorage
+        localStorage.setItem("usuarios", JSON.stringify(this.arrayUsuariosLS)); // Subir nuevo array de usuarios al localStorage
 
-    alert("Se ha borrado el usuario " + emailBorrado) // Notificar el borrado
+        Swal.fire({
+          title: "Usuario borrado!",
+          heightAuto: false,
+          text: "El usuario " + emailBorrado + " ha sido borrado.",
+          icon: "success"
+        });
+      }
+    });
   }
 }
