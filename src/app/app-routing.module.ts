@@ -17,7 +17,11 @@ const routes: Routes = [
     path: 'registro', // Ruta registro
     loadComponent: () =>
       import('./registro/registro.component').then(m => m.RegistroComponent)
+  },  {
+    path: 'listado',
+    loadChildren: () => import('./listado/listado.module').then( m => m.ListadoPageModule)
   }
+
 ];
 
 @NgModule({

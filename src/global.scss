@@ -54,6 +54,52 @@
     width: 300px;
 }
 
+.divListado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+
+.cardListado, .cardListadoAdmin {
+    background: var(--ion-color-tertiary);
+    padding: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 500px;
+    height: 150px;
+    color: var(--ion-color-primary-tint);
+}
+
+.cardListadoAdmin {
+  background: var(--ion-color-primary);
+  color: var(--ion-color-tertiary-shade);
+}
+
+.divContenidoCard {
+  display: flex;
+  justify-content: space-between;
+}
+
+.divIzquierdaCard {
+  text-align: left;
+}
+
+.divDerechaCard {
+  text-align: right;  
+}
+
+.headerCardListado {
+    color: var(--ion-color-primary);
+}
+
+.headerCardListadoAdmin {
+    color: var(--ion-color-tertiary);
+}
+   
 .inputFormularioNormal {
   background: var(--ion-color-tertiary);
   color: var(--ion-color-primary);

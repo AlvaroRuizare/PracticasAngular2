@@ -82,14 +82,24 @@ export class LoginPage implements OnInit {
       contrasena: this.cifrarContrasena(contrasena)
     };
 
-
+    // Si las credenciales son válidas...
     if(this.credencialesValidas(arrayUsuarioIntroducido.email, arrayUsuarioIntroducido.contrasena)){
-      this.mostrarToast("Usuario logueado")
-      alert("Usuario logueado")
+      // Se guarda usuarioLogueado en sessionStorage
+      sessionStorage.setItem('usuarioLogueado', JSON.stringify(this.obtenerUsuarioLogueado(arrayUsuarioIntroducido.email)))
+      this.router.navigateByUrl('/listado') // Se navega
     } else {
-      this.mostrarToast("Las credenciales no son correctas.")
       alert("Las credenciales no son correctas.")
     }
+  }
+
+  // Obtener usuario que ha iniciado sesión
+  obtenerUsuarioLogueado(emailRecibido : string) : any {
+    // Obtener usuarios localStorage
+    const jsonUsuariosLS = localStorage.getItem('usuarios');
+    const arrayUsuarios : any[] = jsonUsuariosLS ? JSON.parse(jsonUsuariosLS) : [];
+
+    // Filtra el array de usuarios para devolver el usuarioLogueado
+    return arrayUsuarios.find(usuario => usuario.email === emailRecibido);
   }
 
 
