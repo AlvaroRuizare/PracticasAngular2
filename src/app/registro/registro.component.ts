@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { Geolocation } from '@capacitor/geolocation';
 import { TranslateService, TranslatePipe, TranslateDirective, TranslateModule } from "@ngx-translate/core";
 import * as CryptoJS from 'crypto-js';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-registro',
@@ -89,30 +90,72 @@ export class RegistroComponent  implements OnInit {
     // Guardar valores del grupo en variables
     const { email, contrasena, fechaNac, telefono, tipoUsuario } = this.grupoFormRegistro.value;
 
+    // Si el email no existe...
+    if(!this.emailYaExiste(email)){
+      // Array actual localStorage
+      const jsonUsuariosLS = localStorage.getItem('usuarios'); // Obtener el array actual de usuarios del localStorage
+      const arrayUsuariosLS = jsonUsuariosLS ? JSON.parse(jsonUsuariosLS) : []; // Si está vacío, devuelve array vacío
+  
+      // Crear array nuevo usuario
+      const arrayUsuarioNuevo = {
+        email: email,
+        contrasena: this.cifrarContrasena(contrasena),
+        fechaNac: fechaNac,
+        telefono: telefono,
+        latitud : this.latitud,
+        longitud : this.longitud,
+        tipoUsuario : tipoUsuario
+      };
+  
+      // Agregar nuevo usuario al array
+      arrayUsuariosLS.push(arrayUsuarioNuevo);
+  
+      // Guardar en localStorage
+      localStorage.setItem('usuarios', JSON.stringify(arrayUsuariosLS));
+
+      // Mostrar confirmación
+      Swal.fire({
+        title: "¡Cuenta creada!",
+        heightAuto: false,
+        text: "El usuario " + email + " se ha registrado correctamente.",
+        icon: "success"
+      });
+  
+      // Resetear campos
+      this.grupoFormRegistro.reset();
+    } else { // Si el usuario ya existe...
+      Swal.fire({
+        title: "¡Ese email ya existe!",
+        heightAuto: false,
+        text: "El usuario " + email + " ya existe en la base de datos.",
+        icon: "warning"
+      });
+    }
+  }
+
+
+  // Comprobar si el email introducido ya existe
+  emailYaExiste(emailRecibido : string) : Boolean{
+    var usuarioYaExiste = false
+
     // Array actual localStorage
     const jsonUsuariosLS = localStorage.getItem('usuarios'); // Obtener el array actual de usuarios del localStorage
     const arrayUsuariosLS = jsonUsuariosLS ? JSON.parse(jsonUsuariosLS) : []; // Si está vacío, devuelve array vacío
+    
+    // Rellenar array temporal emails
+    var arrayEmails = []
+    for (let i = 0; i < arrayUsuariosLS.length; i++) {
+      arrayEmails.push(arrayUsuariosLS[i].email)
+    }
 
-    // Crear array nuevo usuario
-    const arrayUsuarioNuevo = {
-      email: email,
-      contrasena: this.cifrarContrasena(contrasena),
-      fechaNac: fechaNac,
-      telefono: telefono,
-      latitud : this.latitud,
-      longitud : this.longitud,
-      tipoUsuario : tipoUsuario
-    };
+    // Obtener índice del array en el que está el email recibido
+    var i = arrayEmails.indexOf(emailRecibido)
 
-    // Agregar nuevo usuario al array
-    arrayUsuariosLS.push(arrayUsuarioNuevo);
+    if(i != -1){ // Si el usuario recibido está en el array...
+      usuarioYaExiste = true
+    }
 
-    // Guardar en localStorage
-    localStorage.setItem('usuarios', JSON.stringify(arrayUsuariosLS));
-    alert("El usuario " + email + " se ha registrado correctamente.");
-
-    // Resetear campos
-    this.grupoFormRegistro.reset();
+    return usuarioYaExiste
   }
 
 
