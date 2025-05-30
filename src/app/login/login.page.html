@@ -27,6 +27,7 @@
           labelPlacement="floating" 
           placeholder="{{ 'LOGIN.EMAIL_PLACEHOLDER' | translate }}" 
           type="text"
+          clearOnEdit="false"
           mask="A*@A*.A*" [validation]="true" [dropSpecialCharacters]="false"
           [ngClass]="{ 'inputNormalInvalido': grupoFormLogin.get('email')?.touched && grupoFormLogin.get('email')?.invalid }"/>
 

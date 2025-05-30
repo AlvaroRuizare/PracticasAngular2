@@ -3,7 +3,7 @@
     <ion-card class="cardFormulario">
       <!-- Header -->
       <ion-card-header>
-        <ion-card-title color="primary">{{ 'REGISTER.TITLE' | translate }}</ion-card-title>
+        <ion-card-title color="primary">{{ modoEdicion ? ('MODIFY.TITLE' | translate) : ('REGISTER.TITLE' | translate) }}</ion-card-title>
       </ion-card-header>
       
       <form [formGroup]="grupoFormRegistro">
@@ -21,9 +21,10 @@
           formControlName="contrasena" 
           label="{{ 'REGISTER.PASSWORD_LABEL' | translate }}" 
           class="inputFormulario" 
-          labelPlacement="floating" 
+          labelPlacement="floating"
           placeholder="{{ 'REGISTER.PASSWORD_PLACEHOLDER' | translate }}" 
           type="password" 
+          clearOnEdit="false"
           fill="outline">
         </ion-input>
         
@@ -43,7 +44,7 @@
           labelPlacement="floating" 
           placeholder="{{ 'REGISTER.PHONE_PLACEHOLDER' | translate }}" 
           type="text" 
-          mask="999 999 999"
+          mask="999 999 999" 
           [ngClass]="{ 'inputNormalInvalido': grupoFormRegistro.get('telefono')?.touched && grupoFormRegistro.get('telefono')?.invalid }"/>
 
         <!-- Desplegable tipos usuario -->
@@ -52,8 +53,8 @@
         </ion-select>
   
         <!-- Botones formulario -->
-        <ion-button (click)="crearCuenta()" class="botonFormulario" expand="block">{{ 'REGISTER.BUTTON' | translate }}</ion-button>
-        <ion-button (click)="navegarLogin()" class="botonFormulario" fill="clear" size="full">{{ 'REGISTER.CREATEACCOUNT' | translate }}</ion-button>
+        <ion-button (click)="crearOModificar(usuario, idUsuario)" class="botonFormulario" expand="block">{{ modoEdicion ? ('MODIFY.BUTTON' | translate) : ('REGISTER.BUTTON' | translate) }}</ion-button>
+        <ion-button (click)="navegarOSalir()" class="botonFormulario" fill="clear" size="full">{{ modoEdicion ? ('MODIFY.CREATEACCOUNT' | translate) : ('REGISTER.CREATEACCOUNT' | translate) }}</ion-button>
       </form>
     </ion-card>
   </div>
