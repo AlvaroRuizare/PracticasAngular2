@@ -21,5 +21,10 @@
     "CREATEACCOUNT": "I already have an account",
     "TIPO_LABEL": "Tipo de Usuario",
     "TIPO_PLACEHOLDER": "Seleccionar tipo"
+  },
+  "MODIFY": {
+    "TITLE": "Modify account",
+    "BUTTON": "Save changes",
+    "CREATEACCOUNT": "Cancel changes"
   }
 }

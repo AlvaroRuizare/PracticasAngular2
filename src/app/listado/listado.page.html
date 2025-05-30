@@ -12,7 +12,8 @@
       <ion-card 
         *ngFor="let usuario of arrayUsuariosLS; let i = index;"
         class="cardListado"
-        [ngClass]="{'cardListadoAdmin': usuario.tipoUsuario === 'Administrador'}"> <!-- Si el usuario es admin, se cambia el color de la clase -->
+        [ngClass]="{'cardListadoAdmin': usuario.tipoUsuario === 'Administrador'}"
+        (click)="abrirModalModificar(i, usuario)"> <!-- Si el usuario es admin, se cambia el color de la clase -->
           <div class="divContenidoCard">
             <div class="divIzquierdaCard">
               <ion-card-header
@@ -29,6 +30,6 @@
               <ion-icon *ngIf="usuarioLogueado?.tipoUsuario === 'Administrador'" name="trash-outline" style="cursor: pointer;" size="large" (click)="borrarUsuario(i)"/>
             </div>
           </div>
-      </ion-card> <!-- ngFor: obtiene el contenido de un array del .ts y crea elementos html por cada elemento -->
-  </div>
+      </ion-card>
+    </div>
 </ion-content>

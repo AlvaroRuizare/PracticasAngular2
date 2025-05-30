@@ -6,15 +6,15 @@ import { IonicModule } from '@ionic/angular';
 
 import { ListadoPageRoutingModule } from './listado-routing.module';
 
-import { ListadoPage } from './listado.page';
+import { ListadoPage } from './listado.page'
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ListadoPageRoutingModule
-  ],
-  declarations: [ListadoPage]
+    ListadoPageRoutingModule,
+    ListadoPage
+  ]
 })
 export class ListadoPageModule {}

@@ -1,18 +1,23 @@
-import { Component, OnInit, TrackByFunction } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2'
+import { ModalController } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular'; 
+import { CommonModule } from '@angular/common';
+import { RegistroComponent } from '../registro/registro.component';
 
 @Component({
   selector: 'app-listado',
   templateUrl: './listado.page.html',
   styleUrls: ['./listado.page.scss'],
-  standalone: false
+  standalone: true,
+  imports: [FormsModule, IonicModule, CommonModule]
 })
 export class ListadoPage implements OnInit {
   usuarioLogueado : any
   arrayUsuariosLS : any[] = []
 
-
-  constructor() { }
+  constructor(private modalCtrl: ModalController) { }
 
   ngOnInit() {
     // Obtener usuarios para mostrarlos
@@ -23,12 +28,30 @@ export class ListadoPage implements OnInit {
     this.usuarioLogueado = usuarioLogueadoSS == null ? [] : JSON.parse(usuarioLogueadoSS) // Si el sessionStorage está vacío, por defecto array vacío. Si no, el valor del sessionStorage
   }
 
+
+  // Obtener todos los usuarios y guardarlos en la variable de clase arrayUsuariosLS
   obtenerUsuarios(){
     // Array actual localStorage
     const jsonUsuariosLS = localStorage.getItem('usuarios'); // Obtener el array actual de usuarios del localStorage
     this.arrayUsuariosLS = jsonUsuariosLS ? JSON.parse(jsonUsuariosLS) : []; // Si está vacío, devuelve array vacío
   }
 
+
+  // Abrir popup modificaciones y enviar datos del usuario clicado
+  async abrirModalModificar(idUsuario: number, usuario: any) {
+    const modal = await this.modalCtrl.create({
+      component: RegistroComponent,
+      cssClass: 'modalTransparente',
+      componentProps: {
+        idUsuario,
+        usuario
+      }
+    });
+    await modal.present();
+  }
+
+
+  // Borrar usuario listado
   borrarUsuario(indiceUsuarioClicado: number) {
     // Diálogo de confirmación
     Swal.fire({
@@ -39,7 +62,7 @@ export class ListadoPage implements OnInit {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Sí, bórralo!"
+      confirmButtonText: "¡Sí, bórralo!"
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.removeItem("usuarios"); // Borrar tabla usuarios del localStorage
@@ -51,7 +74,7 @@ export class ListadoPage implements OnInit {
         localStorage.setItem("usuarios", JSON.stringify(this.arrayUsuariosLS)); // Subir nuevo array de usuarios al localStorage
 
         Swal.fire({
-          title: "Usuario borrado!",
+          title: "¡Usuario borrado!",
           heightAuto: false,
           text: "El usuario " + emailBorrado + " ha sido borrado.",
           icon: "success"
