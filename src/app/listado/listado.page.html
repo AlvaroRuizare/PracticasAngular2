@@ -1,35 +1,43 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Listado de usuarios</ion-title>
-  </ion-toolbar>
+<ion-header collapse="condense">
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-  </ion-header>
-  <div class="divListado">
-      <!-- ngFor - Tantos ion-cards como usuarios haya en arrayUsuarioLS, y se guarda el índice -->
-      <ion-card 
-        *ngFor="let usuario of arrayUsuariosLS; let i = index;"
-        class="cardListado"
-        [ngClass]="{'cardListadoAdmin': usuario.tipoUsuario === 'Administrador'}"
-        (click)="abrirModalModificar(i, usuario)"> <!-- Si el usuario es admin, se cambia el color de la clase -->
-          <div class="divContenidoCard">
-            <div class="divIzquierdaCard">
-              <ion-card-header
-                class="headerCardListado"
-                [ngClass]="{'headerCardListadoAdmin': usuario.tipoUsuario === 'Administrador'}"> <!-- Clase para el header porque no se aplica estilo de la card -->
-                <b>{{usuario.email}}</b>
-              </ion-card-header>
-              <ion-card-content >
-                <p>Fecha nac.: {{usuario.fechaNac}}</p>
-                <p>Tipo: {{usuario.tipoUsuario}}</p>
-              </ion-card-content>
-            </div>
-            <div class="divDerechaCard"> <!-- ngIf - si el usuario es administrador, se muestran los botones de borrar -->
-              <ion-icon *ngIf="usuarioLogueado?.tipoUsuario === 'Administrador'" name="trash-outline" style="cursor: pointer;" size="large" (click)="borrarUsuario(i)"/>
-            </div>
-          </div>
-      </ion-card>
+<div class="divListado" *ngIf="indiceSeleccionado === 0" @fadeInOut>
+  <!-- ngFor - Tantos ion-cards como usuarios haya en arrayUsuarioLS, y se guarda el índice -->
+  <ion-card *ngFor="let usuario of arrayUsuariosLS; let i = index;" class="cardListado"
+    [ngClass]="{'cardListadoAdmin': usuario.tipoUsuario === 'Administrador'}"
+    (click)="abrirModalModificar(i, usuario)"> <!-- Si el usuario es admin, se cambia el color de la clase -->
+    <div class="divContenidoCard">
+      <div class="divIzquierdaCard">
+        <ion-card-header class="headerCardListado"
+          [ngClass]="{'headerCardListadoAdmin': usuario.tipoUsuario === 'Administrador'}">
+          <!-- Clase para el header porque no se aplica estilo de la card -->
+          <b>{{usuario.email}}</b>
+        </ion-card-header>
+        <ion-card-content>
+          <p>Fecha nac.: {{usuario.fechaNac}}</p>
+          <p>Tipo: {{usuario.tipoUsuario}}</p>
+        </ion-card-content>
+      </div>
+      <div class="divDerechaCard">
+        <!-- ngIf - si el usuario es administrador, se muestran los botones de borrar -->
+        <ion-icon *ngIf="usuarioLogueado?.tipoUsuario === 'Administrador'" name="trash-outline"
+          style="cursor: pointer;" size="large" (click)="borrarUsuario(i, $event)" />
+      </div>
     </div>
-</ion-content>
+  </ion-card>
+</div>
+
+<div *ngIf="indiceSeleccionado === 1" @fadeInOut>
+  <ion-card style="height: 100px;">
+    HOLA
+  </ion-card>
+</div>
+
+<mat-tab-group [(selectedIndex)]="indiceSeleccionado" headerPosition="below">
+  <mat-tab label="USUARIOS" style="vertical-align: top;">
+      
+  </mat-tab>
+  <mat-tab label="CONSULTAS">
+
+  </mat-tab>
+</mat-tab-group>

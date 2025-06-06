@@ -1,4 +1,21 @@
-// CSS a nivel global de aplicación
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+html {
+  @include mat.theme((
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}// CSS a nivel global de aplicación
 
 /*
  * App Global CSS
@@ -219,3 +236,34 @@ ion-alert {
     --background: transparent;
   }
 }
+
+.mat-mdc-tab.mdc-tab { 
+  background-color: var(--ion-color-tertiary); &.mdc-tab-indicator--active { 
+    background-color: var(--ion-color-primary); } 
+  }
+
+/* Texto activo */
+.mat-mdc-tab:not(.mat-mdc-tab-disabled).mdc-tab--active .mdc-tab__text-label {
+  color: var(--ion-color-tertiary) !important;
+}
+
+.mdc-tab .mdc-tab-indicator { display: none; }
+
+
+.contenedor-pantallas {
+  position: relative;
+  overflow: hidden;
+  min-height: 100%; // o lo que necesites
+}
+
+.pantalla {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -5,17 +5,28 @@ import { ModalController } from '@ionic/angular';
 import { IonicModule } from '@ionic/angular'; 
 import { CommonModule } from '@angular/common';
 import { RegistroComponent } from '../registro/registro.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-listado',
   templateUrl: './listado.page.html',
   styleUrls: ['./listado.page.scss'],
   standalone: true,
-  imports: [FormsModule, IonicModule, CommonModule]
+  imports: [FormsModule, IonicModule, CommonModule, MatTabsModule],
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [ // cuando el elemento aparece
+        style({ opacity: 0 }),
+        animate('300ms ease-in', style({ opacity: 1 })),
+      ]),
+    ])
+  ]
 })
 export class ListadoPage implements OnInit {
   usuarioLogueado : any
   arrayUsuariosLS : any[] = []
+  indiceSeleccionado = 0; // Se muestra por defecto la pestaña de usuarios
 
   constructor(private modalCtrl: ModalController) { }
 
@@ -52,7 +63,10 @@ export class ListadoPage implements OnInit {
 
 
   // Borrar usuario listado
-  borrarUsuario(indiceUsuarioClicado: number) {
+  borrarUsuario(indiceUsuarioClicado: number, event: Event) {
+    // Traemos event para que no se clique a la tarjeta del fondo
+    event.stopPropagation();
+    
     // Diálogo de confirmación
     Swal.fire({
       title: "Borrar usuario",
