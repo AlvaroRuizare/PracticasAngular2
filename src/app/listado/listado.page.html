@@ -28,8 +28,26 @@
 </div>
 
 <div *ngIf="indiceSeleccionado === 1" @fadeInOut>
-  <ion-card style="height: 100px;">
-    HOLA
+  <ion-searchbar 
+    showCancelButton="focus" 
+    class="custom" 
+    [(ngModel)]="barraBusqueda"
+    (keyup.enter)="filtrarArticulos(barraBusqueda)" 
+    placeholder="Buscar artículo por ID"
+    enterkeyhint="enter">
+  </ion-searchbar>
+
+  <ion-card *ngIf="articulo" class="cardListado" style="height: auto;">
+    <ion-card-header>
+      <ion-card-title>{{ articulo.descripcion || 'Sin descripción' }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Código:</strong> {{ articulo.codigo || 'N/A' }}</p>
+      <p><strong>Código de barras:</strong> {{ articulo.codigoBarras || 'N/A' }}</p>
+      <p><strong>Referencia:</strong> {{ articulo.referencia || 'N/A' }}</p>
+      <!-- <p><strong>jsonEntero:</strong> {{ articulo | json }}</p> -->
+      
+    </ion-card-content>
   </ion-card>
 </div>
 

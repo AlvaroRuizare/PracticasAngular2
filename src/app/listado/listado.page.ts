@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { RegistroComponent } from '../registro/registro.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { trigger, transition, style, animate } from '@angular/animations';
+import { ArticuloService } from '../articulo.service';
 
 @Component({
   selector: 'app-listado',
@@ -23,12 +24,16 @@ import { trigger, transition, style, animate } from '@angular/animations';
     ])
   ]
 })
+
 export class ListadoPage implements OnInit {
   usuarioLogueado : any
   arrayUsuariosLS : any[] = []
   indiceSeleccionado = 0; // Se muestra por defecto la pestaña de usuarios
+  articulo: any = null;
+  barraBusqueda: any;
 
-  constructor(private modalCtrl: ModalController) { }
+  constructor(private modalCtrl: ModalController, private articuloService: ArticuloService) { }
+
 
   ngOnInit() {
     // Obtener usuarios para mostrarlos
@@ -37,6 +42,8 @@ export class ListadoPage implements OnInit {
     // Obtener usuario logueado para obtener tipo de usuario
     var usuarioLogueadoSS = sessionStorage.getItem('usuarioLogueado')
     this.usuarioLogueado = usuarioLogueadoSS == null ? [] : JSON.parse(usuarioLogueadoSS) // Si el sessionStorage está vacío, por defecto array vacío. Si no, el valor del sessionStorage
+
+    
   }
 
 
@@ -93,6 +100,18 @@ export class ListadoPage implements OnInit {
           text: "El usuario " + emailBorrado + " ha sido borrado.",
           icon: "success"
         });
+      }
+    });
+  }
+
+  filtrarArticulos(valorCampo : string | null | undefined){
+    // Obtener articulo de servicio
+    this.articuloService.getArticuloById(valorCampo).subscribe({
+      next: (data) => {
+        this.articulo = data?.articuloConsulta?.articulo;
+      },
+      error: (err) => {
+        console.error('Error al obtener el artículo', err);
       }
     });
   }

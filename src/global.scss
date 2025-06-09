@@ -249,18 +249,23 @@ ion-alert {
 
 .mdc-tab .mdc-tab-indicator { display: none; }
 
+/* Searchbar modificada */
+ion-searchbar.custom {
+  --background: var(--ion-color-primary);
+  --color: var(--ion-color-tertiary-tint);
+  --placeholder-color: var(--ion-color-tertiary-tint);
+  --icon-color: var(--ion-color-tertiary-tint);
+  --clear-button-color: var(--ion-color-tertiary-tint);
 
-.contenedor-pantallas {
-  position: relative;
-  overflow: hidden;
-  min-height: 100%; // o lo que necesites
+  --border-radius: 6px;
 }
 
-.pantalla {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+ion-searchbar.ios.custom {
+  --cancel-button-color: var(--ion-color-primary);
+}
+
+ion-searchbar.md.custom {
+  --cancel-button-color: var(--ion-color-tertiary-tint);
 }
 
 
